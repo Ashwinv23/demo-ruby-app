@@ -1,0 +1,28 @@
+name: ui
+type: Load Balanced Web Service
+
+http:
+  path: '/'
+
+image:
+  build: Dockerfile
+  port: 4567
+
+cpu: 256       # Number of CPU units for the task.
+memory: 512    # Amount of memory in MiB used by the task.
+count: 1       # Number of tasks that should be running in your service.
+exec: true     # Enable running commands in your container.
+
+environments:
+  develop:
+    count: 1
+
+  stag:
+    count: 2
+    cpu: 512
+    memory: 1024
+
+  prod:
+    count: 3
+    cpu: 1024
+    memory: 2048
